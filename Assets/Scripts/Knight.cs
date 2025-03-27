@@ -13,6 +13,9 @@ public class Knight : MonoBehaviour
     public AudioClip[] footSteps;
 
     bool canRun = true;
+    bool dust = false;
+
+    public GameObject Dust;
 
     public float speed = 2f;
     // Start is called before the first frame update
@@ -42,6 +45,15 @@ public class Knight : MonoBehaviour
         {
             transform.position += transform.right * direction * speed * Time.deltaTime;
         }
+
+        if (!dust)
+        {
+            Dust.SetActive(false);
+        }
+        else
+        {
+            Dust.SetActive(true);
+        }
     }
 
     public void attackHasFinshed()
@@ -52,8 +64,14 @@ public class Knight : MonoBehaviour
 
     public void showDust()
     {
+        dust = true;
         dustAnimator.SetTrigger("startDust");
         int randomNumber = Random.Range(0, footSteps.Length);
         stepAudio.PlayOneShot(footSteps[randomNumber]);
+    }
+
+    public void hideDust()
+    {
+        dust = false;
     }
 }
