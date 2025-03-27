@@ -7,6 +7,10 @@ public class Knight : MonoBehaviour
 
     SpriteRenderer sr;
     Animator animator;
+    public Animator dustAnimator;
+
+    public AudioSource stepAudio;
+    public AudioClip[] footSteps;
 
     bool canRun = true;
 
@@ -16,6 +20,8 @@ public class Knight : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+
+        stepAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -42,5 +48,12 @@ public class Knight : MonoBehaviour
     {
         Debug.Log("The attack animation just finished.;");
         canRun = true;
+    }
+
+    public void showDust()
+    {
+        dustAnimator.SetTrigger("startDust");
+        int randomNumber = Random.Range(0, footSteps.Length);
+        stepAudio.PlayOneShot(footSteps[randomNumber]);
     }
 }
