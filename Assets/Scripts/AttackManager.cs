@@ -5,5 +5,5 @@ using UnityEngine.UI;
 
 public class AttackManager : MonoBehaviour
 {
-    public 
+    
 }
