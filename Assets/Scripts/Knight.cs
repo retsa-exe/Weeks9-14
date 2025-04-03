@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Knight : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class Knight : MonoBehaviour
     public GameObject Dust;
 
     public float speed = 2f;
+
+    public CinemachineImpulseSource impulseSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,8 +70,10 @@ public class Knight : MonoBehaviour
     {
         dust = true;
         dustAnimator.SetTrigger("startDust");
-        int randomNumber = Random.Range(0, footSteps.Length);
-        stepAudio.PlayOneShot(footSteps[randomNumber]);
+
+        stepAudio.PlayOneShot(footSteps[Random.Range(0, footSteps.Length)]);
+
+        impulseSource.GenerateImpulse();
     }
 
     public void hideDust()
