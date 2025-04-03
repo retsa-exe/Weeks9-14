@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.Tilemaps;
 
 public class Knight : MonoBehaviour
 {
@@ -21,6 +22,11 @@ public class Knight : MonoBehaviour
     public float speed = 2f;
 
     public CinemachineImpulseSource impulseSource;
+
+    public Tilemap tilemap;
+
+    public Tile grass;
+    public Tile stone;
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +63,17 @@ public class Knight : MonoBehaviour
         else
         {
             Dust.SetActive(true);
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3Int gridPos = tilemap.WorldToCell(mousePos);
+            
+            if (tilemap.GetTile(gridPos) == stone)
+            {
+                transform.position = mousePos;
+            }
         }
     }
 
