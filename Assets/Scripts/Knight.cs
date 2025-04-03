@@ -88,7 +88,10 @@ public class Knight : MonoBehaviour
         dust = true;
         dustAnimator.SetTrigger("startDust");
 
-        stepAudio.PlayOneShot(footSteps[Random.Range(0, footSteps.Length)]);
+        if (tilemap.GetTile(tilemap.WorldToCell(transform.position)) == stone)
+        {
+            stepAudio.PlayOneShot(footSteps[Random.Range(0, footSteps.Length)]);
+        }
 
         impulseSource.GenerateImpulse();
     }
