@@ -14,6 +14,9 @@ public class Player : MonoBehaviour
     //the timer for coroutine
     float t;
 
+    //get component from the player
+    SpriteRenderer sr;
+
     private void Start()
     {
         //initialize the variables
@@ -23,6 +26,9 @@ public class Player : MonoBehaviour
 
         //set the scale to one
         transform.localScale = Vector3.one * size;
+
+        //get sprite renderer from player
+        sr = GetComponent<SpriteRenderer>();
 
         //start grow with time coroutine
         StartCoroutine(growWithTime());
@@ -54,5 +60,15 @@ public class Player : MonoBehaviour
         pos.x += Input.GetAxis("Horizontal") * Time.deltaTime * speed;
         pos.y += Input.GetAxis("Vertical") * Time.deltaTime * speed;
         transform.position = pos;
+
+        //flip image when player goes right
+        if (Input.GetAxis("Horizontal") > 0)
+        {
+            sr.flipX = true;
+        }
+        else
+        {
+            sr.flipX = false;
+        }
     }
 }
