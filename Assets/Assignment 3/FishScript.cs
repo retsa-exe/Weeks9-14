@@ -5,11 +5,10 @@ using UnityEngine;
 public class FishScript : MonoBehaviour
 {
     //basic variables for the spawned fish
-    public float size = 1;
+    public float size;
 
-    private void Update()
+    private void Start()
     {
-        //update size
-        transform.localScale = Vector3.one * size;
+
     }
 }

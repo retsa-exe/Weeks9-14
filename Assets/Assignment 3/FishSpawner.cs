@@ -35,6 +35,10 @@ public class FishSpawner : MonoBehaviour
                     Vector3 spawnPos = Random.insideUnitCircle * 6;
                     GameObject newSpawnedFish = Instantiate(prefab, spawnPos, Quaternion.identity);
 
+                    //set fish random size
+                    float size = Random.Range(minSize, maxSize);
+                    newSpawnedFish.transform.localScale = Vector3.one * size;
+
                     //add the new spawned fish to the list
                     fishList.Add(newSpawnedFish);
                 }
