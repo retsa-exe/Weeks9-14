@@ -37,7 +37,7 @@ public class FishSpawner : MonoBehaviour
 
                     //set fish random size
                     float size = Random.Range(minSize, maxSize);
-                    newSpawnedFish.transform.localScale = Vector3.one * size;
+                    newSpawnedFish.transform.localScale = Vector3.one *size;
 
                     //add the new spawned fish to the list
                     fishList.Add(newSpawnedFish);

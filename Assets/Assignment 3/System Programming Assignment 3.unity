@@ -344,7 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25288f7ed05a5429098fa7b2a91ed9de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 1318783854249716684, guid: bfa8fc0984f064e7f80d8938781fac2f, type: 3}
   minFishAmount: 8
   spawnAmount: 3
   minSize: 0.5
