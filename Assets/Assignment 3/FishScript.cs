@@ -49,9 +49,15 @@ public class FishScript : MonoBehaviour
 
         //assign the position back to fish
         transform.position = pos;
+
+        //flip the image based on direction
+        if (direction > 0)
+        {
+            sr.flipX = true;
+        }
+        else
+        {
+            sr.flipX = false;
+        }
     }
-
-    //function:
-
-    //flip the x according to direction
 }
