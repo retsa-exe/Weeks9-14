@@ -10,6 +10,9 @@ public class FishScript : MonoBehaviour
     public int direction;
     float initialY;
 
+    //place that exceed the screen
+    public float exceedScreen = 150;
+
     //animation curve for y movement
     public AnimationCurve curve;
 
@@ -38,25 +41,25 @@ public class FishScript : MonoBehaviour
     {
         //make the fish bounce between screen
         Vector2 pos = transform.position;
-        pos.x += speed * direction * Time.deltaTime;
 
-        //calculate the new Y
+        //calculate the new X and Y
+        pos.x += speed * direction * Time.deltaTime;
         pos.y = initialY + curve.Evaluate((Time.time / 3) % 1) * 0.3f;
 
         //get the screen position of fish
-        Vector2 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+        Vector2 screenPos = Camera.main.WorldToScreenPoint(pos);
 
         //set value base on which side of edge
-        if (screenPos.x < 0)
+        if (screenPos.x < (0 - exceedScreen))
         {
             direction *= -1;
-            Vector3 worldLeft = Camera.main.ScreenToWorldPoint(Vector3.zero);
+            Vector3 worldLeft = Camera.main.ScreenToWorldPoint(new Vector3(0 - exceedScreen, 0, 0));
             pos.x = worldLeft.x;
         }
-        if (screenPos.x > Screen.width)
+        if (screenPos.x > (Screen.width + exceedScreen))
         {
             direction *= -1;
-            Vector3 worldRight = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0));
+            Vector3 worldRight = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width + exceedScreen, 0, 0));
             pos.x = worldRight.x;
         }
 

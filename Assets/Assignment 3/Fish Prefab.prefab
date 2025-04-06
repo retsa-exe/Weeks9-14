@@ -100,6 +100,7 @@ MonoBehaviour:
   size: 1
   speed: 2
   direction: 0
+  exceedScreen: 150
   curve:
     serializedVersion: 2
     m_Curve:
