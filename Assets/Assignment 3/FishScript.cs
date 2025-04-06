@@ -41,7 +41,7 @@ public class FishScript : MonoBehaviour
         pos.x += speed * direction * Time.deltaTime;
 
         //calculate the new Y
-        pos.y = initialY + curve.Evaluate(Time.time % 1);
+        pos.y = initialY + curve.Evaluate((Time.time / 3) % 1) * 0.3f;
 
         //get the screen position of fish
         Vector2 screenPos = Camera.main.WorldToScreenPoint(transform.position);
