@@ -84,10 +84,14 @@ public class Player : MonoBehaviour
         List<GameObject> fishes = spawner.fishList;
 
         //detect the distance of the fishes
-        foreach (GameObject fish in fishes)
+        for (int i = fishes.Count - 1; i >= 0; i--)
         {
+            //get fish form the object
+            GameObject fish = fishes[i];
+            float fishSize = fish.transform.localScale.x;
+
             //calculate the collision distance between the player and fish
-            float collisionDistance = size / 2 + fish.transform.localScale.x / 2;
+            float collisionDistance = size / 2 + fishSize / 2;
 
             //calculate the distance between player and fish
             float distance = Vector2.Distance(transform.position, fish.transform.position);
@@ -95,8 +99,28 @@ public class Player : MonoBehaviour
             //detect if the fish is near the player
             if (distance <= collisionDistance)
             {
-                Debug.Log("The fish is close!");
+                //call eat function if fish is smaller than player
+                if (size > fishSize)
+                {
+                    Debug.Log("Eat fish!");
+                    Eat(fish);
+                }
             }
         }
+    }
+
+    void Eat(GameObject fish)
+    {
+        //variable changes
+        score += 100;
+        health += 10;
+        size += 0.1f;
+
+        //assign the size to the scale
+        transform.localScale = Vector2.one * size;
+
+        //destroy the fish being eaten
+        spawner.fishList.Remove(fish);
+        Destroy(fish);
     }
 }
