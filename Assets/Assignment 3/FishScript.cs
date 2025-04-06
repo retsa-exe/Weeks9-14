@@ -8,6 +8,10 @@ public class FishScript : MonoBehaviour
     public float size;
     public float speed = 2;
     public int direction;
+    float initialY;
+
+    //animation curve for y movement
+    public AnimationCurve curve;
 
     //components from fish
     SpriteRenderer sr;
@@ -25,6 +29,9 @@ public class FishScript : MonoBehaviour
 
         //get component from fish
         sr = GetComponent<SpriteRenderer>();
+
+        //record the initial Y position
+        initialY = transform.position.y;
     }
 
     private void Update()
@@ -32,6 +39,9 @@ public class FishScript : MonoBehaviour
         //make the fish bounce between screen
         Vector2 pos = transform.position;
         pos.x += speed * direction * Time.deltaTime;
+
+        //calculate the new Y
+        pos.y = initialY + curve.Evaluate(Time.time % 1);
 
         //get the screen position of fish
         Vector2 screenPos = Camera.main.WorldToScreenPoint(transform.position);
