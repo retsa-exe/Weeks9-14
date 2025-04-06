@@ -223,6 +223,7 @@ MonoBehaviour:
   score: 0
   speed: 2
   speedOfGrowth: 1.05
+  spawner: {fileID: 2132909212}
 --- !u!1 &2131643617
 GameObject:
   m_ObjectHideFlags: 0

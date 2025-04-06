@@ -17,6 +17,9 @@ public class Player : MonoBehaviour
     //get component from the player
     SpriteRenderer sr;
 
+    //get the spawner to get the fish array
+    public FishSpawner spawner;
+
     private void Start()
     {
         //initialize the variables
@@ -69,6 +72,31 @@ public class Player : MonoBehaviour
         else
         {
             sr.flipX = false;
+        }
+
+        //check fish collisions
+        checkFishCollisions();
+    }
+
+    void checkFishCollisions()
+    {
+        //get the fish list from the spawner
+        List<GameObject> fishes = spawner.fishList;
+
+        //detect the distance of the fishes
+        foreach (GameObject fish in fishes)
+        {
+            //calculate the collision distance between the player and fish
+            float collisionDistance = size / 2 + fish.transform.localScale.x / 2;
+
+            //calculate the distance between player and fish
+            float distance = Vector2.Distance(transform.position, fish.transform.position);
+
+            //detect if the fish is near the player
+            if (distance <= collisionDistance)
+            {
+                Debug.Log("The fish is close!");
+            }
         }
     }
 }
