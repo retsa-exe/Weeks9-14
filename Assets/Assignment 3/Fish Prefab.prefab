@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 1
-  speed: 2
+  speed: 1
   direction: 0
   exceedScreen: 150
   curve:
@@ -153,3 +153,4 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   spawner: {fileID: 0}
+  randomNum: 0

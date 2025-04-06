@@ -22,6 +22,9 @@ public class FishScript : MonoBehaviour
     //remember the spawner
     public FishSpawner spawner;
 
+    //random value add to fish Y movement
+    public float randomNum;
+
     private void Start()
     {
         //get size from the transform
@@ -35,6 +38,9 @@ public class FishScript : MonoBehaviour
 
         //record the initial Y position
         initialY = transform.position.y;
+
+        //generate a value that randomlize the animation
+        randomNum = Random.Range(0f, 1f);
     }
 
     private void Update()
@@ -44,7 +50,7 @@ public class FishScript : MonoBehaviour
 
         //calculate the new X and Y
         pos.x += speed * direction * Time.deltaTime;
-        pos.y = initialY + curve.Evaluate((Time.time / 3) % 1) * 0.3f;
+        pos.y = initialY + curve.Evaluate((Time.time + randomNum) / 3 % 1) * 0.3f;
 
         //get the screen position of fish
         Vector2 screenPos = Camera.main.WorldToScreenPoint(pos);
