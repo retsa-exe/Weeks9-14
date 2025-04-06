@@ -105,6 +105,10 @@ public class Player : MonoBehaviour
                     Debug.Log("Eat fish!");
                     Eat(fish);
                 }
+                else
+                {
+                    takeDamage(fishSize - size);
+                }
             }
         }
     }
@@ -122,5 +126,13 @@ public class Player : MonoBehaviour
         //destroy the fish being eaten
         spawner.fishList.Remove(fish);
         Destroy(fish);
+    }
+
+    void takeDamage (float damage)
+    {
+        //convert the damage to whole number
+        damage = Mathf.RoundToInt(damage * 5);
+        health -= damage;
+        Debug.Log("Take " + damage + " damage!");
     }
 }
