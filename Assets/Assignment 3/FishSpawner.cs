@@ -39,6 +39,10 @@ public class FishSpawner : MonoBehaviour
                     float size = Random.Range(minSize, maxSize);
                     newSpawnedFish.transform.localScale = Vector3.one *size;
 
+                    //regist the spawner
+                    FishScript newFishScript = newSpawnedFish.GetComponent<FishScript>();
+                    newFishScript.spawner = this;
+
                     //add the new spawned fish to the list
                     fishList.Add(newSpawnedFish);
                 }

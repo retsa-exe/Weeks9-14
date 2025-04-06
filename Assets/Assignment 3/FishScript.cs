@@ -12,6 +12,9 @@ public class FishScript : MonoBehaviour
     //components from fish
     SpriteRenderer sr;
 
+    //remember the spawner
+    public FishSpawner spawner;
+
     private void Start()
     {
         //get size from the transform
