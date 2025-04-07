@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class Player : MonoBehaviour
 
     //get the spawner to get the fish array
     public FishSpawner spawner;
+
+    //events for value changed
+    public UnityEvent onHealthChanged;
+    public UnityEvent onScoreChanged;
+    public UnityEvent onGameOver;
 
     private void Start()
     {
