@@ -12,8 +12,9 @@ public class Player : MonoBehaviour
     float size;
     public float speedOfGrowth = 1.05f;
 
-    //the timer for coroutine
+    //timers
     float t;
+    float damageTimer;
 
     //get component from the player
     SpriteRenderer sr;
@@ -22,16 +23,12 @@ public class Player : MonoBehaviour
     public FishSpawner spawner;
 
     //events for value changed
-    public UnityEvent<float> onHealthChanged;
-    public UnityEvent<float> onScoreChanged;
+    public UnityEvent<float> onHealthChanged = new UnityEvent<float>();
+    public UnityEvent<float> onScoreChanged = new UnityEvent<float>();
     public UnityEvent onGameOver;
 
     private void Start()
     {
-        //initiallize the unity events
-        onScoreChanged = new UnityEvent<float>();
-        onHealthChanged = new UnityEvent<float>();
-
         //initialize the variables
         health = 50;
         score = 0;
@@ -68,6 +65,9 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        //update damage timer
+        damageTimer += Time.deltaTime;
+
         //make the player move by player inputs
         Vector2 pos = transform.position;
         pos.x += Input.GetAxis("Horizontal") * Time.deltaTime * speed;
@@ -117,7 +117,14 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    takeDamage(fishSize - size);
+                    //check the cool down timer
+                    if (damageTimer > 1.5f)
+                    {
+                        takeDamage(fishSize - size);
+
+                        //reset the cool down timer
+                        damageTimer = 0;
+                    }
                 }
             }
         }
@@ -148,5 +155,8 @@ public class Player : MonoBehaviour
         damage = Mathf.RoundToInt(damage * 5);
         health -= damage;
         Debug.Log("Take " + damage + " damage!");
+
+        //invoke unity events
+        onHealthChanged.Invoke(health);
     }
 }
