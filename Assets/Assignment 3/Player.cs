@@ -134,7 +134,7 @@ public class Player : MonoBehaviour
     {
         //variable changes
         score += 100;
-        health += 10;
+        health += 3;
         size += 0.1f;
 
         //invoke unity events
