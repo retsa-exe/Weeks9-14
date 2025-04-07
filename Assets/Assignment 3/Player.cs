@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
+    //use Kenney's Art: https://www.kenney.nl
+
     //basic information on player
     public float health = 50;
     public float score;
