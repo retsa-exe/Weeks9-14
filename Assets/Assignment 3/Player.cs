@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     float size;
     public float speedOfGrowth = 1.05f;
     public float maxSize = 3.5f;
+    public bool isGameOver = false;
 
     //timers
     float t;
@@ -79,6 +80,12 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        //skip the update loop if game is over
+        if (isGameOver)
+        {
+            return;
+        }
+
         //update damage timer
         damageTimer += Time.deltaTime;
 
@@ -178,5 +185,16 @@ public class Player : MonoBehaviour
 
         //invoke unity events
         onHealthChanged.Invoke(health);
+
+        //check player health, call game over when health is below zero
+        if (health <= 0 && !isGameOver)
+        {
+            //set game over to true, and stop coroutine
+            isGameOver = true;
+            StopAllCoroutines();
+
+            //invoke gameover event
+            onGameOver.Invoke();
+        }
     }
 }
