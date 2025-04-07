@@ -22,12 +22,16 @@ public class Player : MonoBehaviour
     public FishSpawner spawner;
 
     //events for value changed
-    public UnityEvent onHealthChanged;
-    public UnityEvent onScoreChanged;
+    public UnityEvent<float> onHealthChanged;
+    public UnityEvent<float> onScoreChanged;
     public UnityEvent onGameOver;
 
     private void Start()
     {
+        //initiallize the unity events
+        onScoreChanged = new UnityEvent<float>();
+        onHealthChanged = new UnityEvent<float>();
+
         //initialize the variables
         health = 50;
         score = 0;
@@ -125,6 +129,10 @@ public class Player : MonoBehaviour
         score += 100;
         health += 10;
         size += 0.1f;
+
+        //invoke unity events
+        onScoreChanged.Invoke(score);
+        onHealthChanged.Invoke(health);
 
         //assign the size to the scale
         transform.localScale = Vector2.one * size;
