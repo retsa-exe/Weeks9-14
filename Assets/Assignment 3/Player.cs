@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public float speed = 2;
     float size;
     public float speedOfGrowth = 1.05f;
+    public float maxSize = 3.5f;
 
     //timers
     float t;
@@ -42,6 +43,13 @@ public class Player : MonoBehaviour
 
         //start grow with time coroutine
         StartCoroutine(growWithTime());
+
+        //reset the size to max size if player gets bigger than it
+        if (size > maxSize)
+        {
+            size = maxSize;
+            transform.localScale = Vector3.one * size;
+        }
     }
 
     //the coroutine that makes the player grow with time
@@ -57,6 +65,12 @@ public class Player : MonoBehaviour
             {
                 t = 0;
                 size *= speedOfGrowth;
+
+                //check if exceed the maxium value
+                if (size > maxSize)
+                {
+                    size = maxSize;
+                }
                 transform.localScale = Vector3.one * size;
             }
             yield return null;
@@ -140,6 +154,12 @@ public class Player : MonoBehaviour
         //invoke unity events
         onScoreChanged.Invoke(score);
         onHealthChanged.Invoke(health);
+
+        //check if exceed the maxium value
+        if (size > maxSize)
+        {
+            size = maxSize;
+        }
 
         //assign the size to the scale
         transform.localScale = Vector2.one * size;
